@@ -2,6 +2,12 @@
 A lettl Widght like Chromium Widght based on Chrome
 
 
+
+# from chrumium import BrowserModule
+
+
+browser = BrowserModule()
+
 def main(target: Control):
     url = "data:text/html," + target
 
