@@ -1,0 +1,52 @@
+[  
+    {    
+        "name": "user-data-dir",    
+        "description": "Specifies the directory that user data (such as cookies, history, and cache) should be written to and read from.",    
+        "type": "string"  
+    },  
+    {    
+        "name": "disable-extensions",    
+        "description": "Disables extensions from being installed or running.",    
+        "type": "boolean"  
+    },  
+    {    
+        "name": "disable-gpu",    
+        "description": "Disables hardware acceleration using the GPU.",    
+        "type": "boolean"  
+    },  
+    {    
+        "name": "disable-popup-blocking",    
+        "description": "Disables the pop-up blocker.",    
+        "type": "boolean"  
+    },  
+    {    
+        "name": "disable-plugins",    
+        "description": "Disables plugins from being installed or running.",    
+        "type": "boolean"  
+    },  
+    {    
+        "name": "disable-translate",    
+        "description": "Disables the translation feature.",    
+        "type": "boolean"  
+    },  
+    {    
+        "name": "headless",    
+        "description": "Runs Chrome in headless mode.",    
+        "type": "boolean"  
+    },  
+    {    
+        "name": "incognito",   
+        "description": "Runs Chrome in incognito mode.",    
+        "type": "boolean"  
+    },  
+    {    
+        "name": "remote-debugging-port",    
+        "description": "Specifies the port number for remote debugging.",    
+        "type": "integer"  
+    },  
+    {    
+        "name": "window-size",    
+        "description": "Specifies the initial size of the browser window.",    
+        "type": "string"  
+    }
+]
