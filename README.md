@@ -1,5 +1,5 @@
 # Python-Chromium
-##A lettl Widght like Chromium Widght based on Chrome
+###lettl Widght like Chromium Widght based on Chrome
 
 ## Installation
 
