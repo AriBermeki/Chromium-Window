@@ -1,7 +1,7 @@
 # Python-Chromium
 ###lettl Widght like Chromium Widght based on Chrome
 
-## Installation
+<p>Installation</p>
 
 ```bash
 python3 -m pip install chromium
@@ -23,5 +23,5 @@ BrowserModule.browser_open(view='app', url='https://example.com', width=800, hei
 
 ```
 
-'''
+
 
