@@ -1,17 +1,27 @@
 # Python-Chromium
-A lettl Widght like Chromium Widght based on Chrome
+##A lettl Widght like Chromium Widght based on Chrome
 
+## Installation
 
+```bash
+python3 -m pip install chromium
+```
 
-from chrumium import BrowserModule
+## Usage
 
+Write your nice GUI in a file `main.py`:
 
+```python
+from chromium import BrowserModule
 
-Opens the browser in standard mode with the specified URL
-BrowserModule.browser_open(url='https://example.com')
-
-Open the browser in full screen mode
+#Open the browser in full screen mode
 BrowserModule.browser_open(url='https://example.com', fullscreen=True)
 
-Open the browser in dark mode
+#Open the browser in dark mode
 BrowserModule.browser_open(view='app', url='https://example.com', width=800, height=600, c darck_modo=True)
+
+
+```
+
+'''
+
