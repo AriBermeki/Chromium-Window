@@ -1,5 +1,5 @@
 # Python-Chromium
-### lettl Widght like Chromium Widght based on Chrome
+### lettl Window like Chromium Window based on Chrome
 
 <p>Installation</p>
 
