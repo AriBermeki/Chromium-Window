@@ -1,5 +1,5 @@
 # Python-Chromium
-###lettl Widght like Chromium Widght based on Chrome
+### lettl Widght like Chromium Widght based on Chrome
 
 <p>Installation</p>
 
@@ -18,7 +18,7 @@ from chromium import BrowserModule
 BrowserModule.browser_open(url='https://example.com', fullscreen=True)
 
 #Open the browser in dark mode
-BrowserModule.browser_open(view='app', url='https://example.com', width=800, height=600, c darck_modo=True)
+BrowserModule.browser_open(view='app', url='https://example.com', width=800, height=600, darck_modo=True)
 
 
 ```
