@@ -7,11 +7,11 @@ from chrumium import BrowserModule
 
 
 
-Öffne den Browser im Standardmodus mit der angegebenen URL
+Opens the browser in standard mode with the specified URL
 BrowserModule.browser_open(url='https://example.com')
 
-Öffne den Browser im Vollbildmodus
+Open the browser in full screen mode
 BrowserModule.browser_open(url='https://example.com', fullscreen=True)
 
-Öffne den Browser im App-Modus mit angegebener Größe und bestätige das Schließen
-BrowserModule.browser_open(view='app', url='https://example.com', width=800, height=600, confirm_close=True)
+Open the browser in dark mode
+BrowserModule.browser_open(view='app', url='https://example.com', width=800, height=600, c darck_modo=True)
