@@ -9,9 +9,9 @@ OptionsDictT = dict[str, any]
 
 class BrowserModule:
     name: str = 'Google Chrome/Chromium'
-
+    
     @staticmethod
-    def run(path: str, options: dict, start_urls: List[str]) -> None:
+    def run(path: str, options: dict, start_urls: List[str], window_size: Optional[List[int]] = None) -> None:
         if not isinstance(options['cmdline_args'], list):
             raise TypeError("'cmdline_args' option must be of type List[str]")
         if options['app_mode']:
@@ -19,11 +19,16 @@ class BrowserModule:
                 subsystem.Popen([path, '--app=%s' % url] +
                         options['cmdline_args'],
                         stdout=subsystem.PIPE, stderr=subsystem.PIPE, stdin=subsystem.PIPE)
+                        
+        
+   
         else:
             args: List[str] = options['cmdline_args'] + start_urls
+            if window_size is not None:
+                args += ['--window-size=%s,%s' % (window_size[0], window_size[1])]
             subsystem.Popen([path, '--new-window'] + args,
                     stdout=subsystem.PIPE, stderr=sys.stderr, stdin=subsystem.PIPE)
-
+            
     @staticmethod
     def find_path() -> Optional[str]:
         if sys.platform in ['win32', 'win64']:
@@ -61,7 +66,7 @@ class BrowserModule:
 
     @staticmethod
     def _find_chrome_linux() -> Optional[str]:
-        import Browser.context as wch
+        import nicegui.functions.context as wch
         chrome_names = ['chromium-browser',
                         'chromium',
                         'google-chrome',
@@ -94,12 +99,86 @@ class BrowserModule:
         return chrome_path
     
 
+    # @staticmethod
+    # def browser_open(
+    #     url: Optional[str] = None,
+    #     view: Optional[str]=None,
+    #     width: int = None,
+    #     height: int = None,
+    #     fullscreen: bool = None,
+    #     confirm_close: bool =  None
+    #     ):
+    #     if view =='app':
+    #         reload = False
+    #         browser_path = BrowserModule.find_path()
+    #         parameters = "web"
+    #         title = title
+    #         flags = [
+    #             f"--user-data-dir={parameters}",
+    #             "--no-first-run",
+    #             "--warn-on-close",
+    #             f"--app-name={title}"
+    #             ]
+    #         if width and height:
+    #             flags.extend([f"--window-size={width},{height}"])
+    #             options = {'cmdline_args': flags, 'app_mode': True}
+    #         if fullscreen == True:
+    #             flags.extend(["--start-maximized", '--kiosk'])
+    #             options = {'cmdline_args': flags, 'app_mode': True}
+
+    #         if confirm_close == True:
+    #             flags.extend(["--warn-on-close"])
+    #             options = {'cmdline_args': flags, 'app_mode': True}
+
+    #         if browser_path is not None:
+                    
+    #             BrowserModule.run(browser_path, options, [url])
+    @staticmethod
+    def browser_open(
+        title: str = None,
+        url: Optional[str] = None,
+        view: Optional[str]=None,
+        width: int = None,
+        height: int = None,
+        fullscreen: bool = None,
+    ):
+        if view =='app':
+            browser_path = BrowserModule.find_path()
+            parameters = "web"
+            flags = [
+                f"--user-data-dir={parameters}",
+                "--no-first-run",
+               "--Web-App-Manifest-Icons=Enabled",
+               "--Smooth-Scrolling=Enabled"#Disabled
+                f"--app-name={title}"
+                ]
+            if width and height:
+                flags.extend([f"--window-size={width},{height}"])
+                options = {'cmdline_args': flags, 'app_mode': True}
+            if fullscreen:
+                flags.extend(["--start-maximized", '--kiosk'])
+                options = {'cmdline_args': flags, 'app_mode': True}
+
     
 
+            if browser_path is not None:
+                    
+                BrowserModule.run(browser_path, options, [url])
 
 
 
 
 
-# Erstellen einer Instanz der Klasse
+
+
+
+# # Öffne den Browser im Standardmodus mit der angegebenen URL
+# BrowserModule.browser_open(url='https://example.com')
+
+# # Öffne den Browser im Vollbildmodus
+# BrowserModule.browser_open(url='https://example.com', fullscreen=True)
+
+# # Öffne den Browser im App-Modus mit angegebener Größe und bestätige das Schließen
+# BrowserModule.browser_open(view='app', url='https://example.com', width=800, height=600, confirm_close=True)
+
 
