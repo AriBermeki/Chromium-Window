@@ -1,4 +1,4 @@
-# Python-Chromium
+# Chromium-Window
 ### lettl Window like Chromium Window based on Chrome
 
 <p>Installation</p>
