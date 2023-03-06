@@ -4,7 +4,7 @@
 <p>Installation</p>
 
 ```bash
-python3 -m pip install chromium
+python3 -m pip install hybrid-chromium
 ```
 
 ## Usage
