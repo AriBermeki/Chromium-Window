@@ -3,31 +3,15 @@ A lettl Widght like Chromium Widght based on Chrome
 
 
 
-# from chrumium import BrowserModule
+from chrumium import BrowserModule
 
 
-browser = BrowserModule()
 
-def main(target: Control):
-    url = "data:text/html," + target
+Öffne den Browser im Standardmodus mit der angegebenen URL
+BrowserModule.browser_open(url='https://example.com')
 
+Öffne den Browser im Vollbildmodus
+BrowserModule.browser_open(url='https://example.com', fullscreen=True)
 
-    options = {
-        '--app=': None,
-        'app_mode': True,
-        '--window-size=':None,
-        '--remote-debugging-port=':True,
-        '--app-window-icon=':None,
-        '--app-window-size=':'1920x1080',
-        '--no-sandbox': True,
-        'cmdline_args': []
-    }
-
-
-    # Browserpfad finden
-    path = browser.find_path()
-
-    # Browser-Fenster öffnen
-    browser.run(path, options, [url])
-
-main(html_doc)
+Öffne den Browser im App-Modus mit angegebener Größe und bestätige das Schließen
+BrowserModule.browser_open(view='app', url='https://example.com', width=800, height=600, confirm_close=True)
