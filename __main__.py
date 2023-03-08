@@ -1,12 +1,15 @@
 import pkg_resources as pkg
 import PyInstaller.__main__ as pyi
-import os
 from argparse import ArgumentParser, Namespace
 from typing import List
 import nicegui
 from pathlib import Path
 from PyInstaller.utils.hooks import collect_submodules
 import re
+import os
+from PyInstaller import log as logging
+from PyInstaller import compat
+from os import listdir
 parser: ArgumentParser = ArgumentParser(description="""
 Hybrid empowers developers to effortlessly build real-time web, mobile, and desktop applications in Python, without requiring prior frontend experience. 
 It is an incredibly powerful Python library that allows you to create cross-platform graphical user interface applications with ease, similar to Electronjs, 
@@ -19,6 +22,9 @@ Additionally, Hybrid supports PWA Progressive Web Applications, enabling easy in
 If you're looking for a robust and versatile library to create visually stunning applications, then Hybrid is undoubtedly the right choice. 
 Explore the full potential of this exceptional library by giving it a try today!
 """)
+
+
+
 parser.add_argument(
     "main_script",
     type=str,
@@ -35,37 +41,16 @@ args, unknown_args = parser.parse_known_args()
 main_script: str = args.main_script
 web_folder: str = args.web_folder
 
-
-binary_data = []
-
-
-def search_binary_data(file_path):
-    with open(file_path, 'rb') as f:
-        contents = f.read()
-
-    # Look for the pattern 'b\x{2-digit-hex}\x{2-digit-hex}+' in the file contents
-    binary_pattern = re.compile(rb'b\\x[0-9a-fA-F]{2}[0-9a-fA-F]*')
-    matches = binary_pattern.findall(contents)
-
-    if len(matches) > 0:
-        print(f"Found {len(matches)} instances of binary data in {file_path}:")
-        for match in matches:
-            return binary_data.append(match)
-    else:
-        print(f"No binary data found in {file_path}.")
-    
 print("Building executable with main script '%s' and web folder '%s'...\n" %
       (main_script, web_folder))
 
-static_folder: str = pkg.resource_filename('nicegui', 'static')
+static_folder = Path(nicegui.__file__).parent
 static_folder_arg: str = '%s%snicegui' % (static_folder, os.pathsep)
 web_folder_arg: str = '%s%s%s' % (web_folder, os.pathsep, web_folder)
-search_binary_data(main_script)
 needed_args: List[str] = [
-    '--onefile',
+    '--noconfirm',
+    '--onedir',
     '--windowed',
-    '--noconsole',
-    '--add-binary',f'{binary_data}',
     '--hidden-import','uvicorn', 
     '--hidden-import','uvicorn.__main__', 
     '--hidden-import','uvicorn._subprocess', 
@@ -919,7 +904,7 @@ needed_args: List[str] = [
 
 
 full_args: List[str] = [main_script] + needed_args + unknown_args
-print('Running:\npyinstaller', ' '.join(full_args), '\n')
+print('Running:\npyinstaller',' '.join(full_args), '\n')
 
 pyi.run(full_args)
 
