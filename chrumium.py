@@ -98,41 +98,6 @@ class BrowserModule:
 
         return chrome_path
     
-
-    # @staticmethod
-    # def browser_open(
-    #     url: Optional[str] = None,
-    #     view: Optional[str]=None,
-    #     width: int = None,
-    #     height: int = None,
-    #     fullscreen: bool = None,
-    #     confirm_close: bool =  None
-    #     ):
-    #     if view =='app':
-    #         reload = False
-    #         browser_path = BrowserModule.find_path()
-    #         parameters = "web"
-    #         title = title
-    #         flags = [
-    #             f"--user-data-dir={parameters}",
-    #             "--no-first-run",
-    #             "--warn-on-close",
-    #             f"--app-name={title}"
-    #             ]
-    #         if width and height:
-    #             flags.extend([f"--window-size={width},{height}"])
-    #             options = {'cmdline_args': flags, 'app_mode': True}
-    #         if fullscreen == True:
-    #             flags.extend(["--start-maximized", '--kiosk'])
-    #             options = {'cmdline_args': flags, 'app_mode': True}
-
-    #         if confirm_close == True:
-    #             flags.extend(["--warn-on-close"])
-    #             options = {'cmdline_args': flags, 'app_mode': True}
-
-    #         if browser_path is not None:
-                    
-    #             BrowserModule.run(browser_path, options, [url])
     @staticmethod
     def browser_open(
         title: str = None,
@@ -141,12 +106,12 @@ class BrowserModule:
         width: int = None,
         height: int = None,
         fullscreen: bool = None,
+        darck_modo: bool = None,
     ):
         if view =='app':
             browser_path = BrowserModule.find_path()
-            parameters = "web"
+
             flags = [
-                f"--user-data-dir={parameters}",
                 "--no-first-run",
                "--Web-App-Manifest-Icons=Enabled",
                "--Smooth-Scrolling=Enabled"#Disabled
@@ -158,6 +123,10 @@ class BrowserModule:
             if fullscreen:
                 flags.extend(["--start-maximized", '--kiosk'])
                 options = {'cmdline_args': flags, 'app_mode': True}
+            
+            if darck_modo:
+                flags.extend(["enable-force-dark=Enabled"])
+                options = {'cmdline_args': flags, 'app_mode': True}
 
     
 
@@ -166,19 +135,22 @@ class BrowserModule:
                 BrowserModule.run(browser_path, options, [url])
 
 
+#def open_braowser(url):
+    #BrowserModule.browser_open(url=url, darck_modo=True, width=600, height=600)
 
 
 
+#if __name__ == "__main__":
+    #open_braowser('https://example.com')
 
+    # # Öffne den Browser im Standardmodus mit der angegebenen URL
 
+    #BrowserModule.browser_open(url='https://example.com', darck_modo=True)
 
-# # Öffne den Browser im Standardmodus mit der angegebenen URL
-# BrowserModule.browser_open(url='https://example.com')
+    # # Öffne den Browser im Vollbildmodus
+    # BrowserModule.browser_open(url='https://example.com', fullscreen=True)
 
-# # Öffne den Browser im Vollbildmodus
-# BrowserModule.browser_open(url='https://example.com', fullscreen=True)
-
-# # Öffne den Browser im App-Modus mit angegebener Größe und bestätige das Schließen
-# BrowserModule.browser_open(view='app', url='https://example.com', width=800, height=600, confirm_close=True)
+    # # Öffne den Browser im App-Modus mit angegebener Größe und bestätige das Schließen
+    # BrowserModule.browser_open(view='app', url='https://example.com', width=800, height=600, confirm_close=True)
 
 
