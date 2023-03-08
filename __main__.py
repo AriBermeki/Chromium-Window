@@ -902,10 +902,10 @@ needed_args: List[str] = [
     '--add-data', static_folder_arg, 
     '--add-data', web_folder_arg]
 
-
+print('__the process has started the initialization of the packets___')
 full_args: List[str] = [main_script] + needed_args + unknown_args
 print('Running:\npyinstaller',' '.join(full_args), '\n')
 
 pyi.run(full_args)
 
-print('_______________Progres END____________')
+print('____________________________Progres END_________________________')
